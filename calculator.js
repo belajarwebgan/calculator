@@ -9,7 +9,6 @@ app.get("/",function(req,res) {
 });
 
 app.post("/",function(req,res) {
-    console.log(req.body);
     var a=Number(req.body.a);
     var op=req.body.op;
     var b=Number(req.body.b);
@@ -24,6 +23,17 @@ app.post("/",function(req,res) {
     else result=404;
     if (result==404) res.send("Can't calculate. Not found.");
     else res.send("The answer is " + result);
+});
+
+app.get("/bmicalculator",function(req,res) {
+    res.sendFile(__dirname + "/bmiCalculator.html");
+});
+
+app.post("/bmicalculator",function(req,res) {
+    var height=Number(req.body.height);
+    var weight=Number(req.body.weight);
+    var result=weight/(height*height);
+    res.send("Your BMI is " + result);
 });
 
 app.listen(3000,function() {
